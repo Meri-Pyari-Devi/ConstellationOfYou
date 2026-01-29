@@ -1,0 +1,119 @@
+/* --- RESET & BASIC SETUP --- */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    height: 100vh;
+    background: radial-gradient(circle at bottom, #1b2735 0%, #090a0f 100%);
+    overflow: hidden;
+    font-family: 'Poppins', sans-serif;
+    color: white;
+}
+
+/* --- STARS BACKGROUND --- */
+.stars {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    z-index: 0; pointer-events: none;
+}
+.star-dot {
+    position: absolute; background: white; border-radius: 50%;
+    opacity: 0.8; animation: twinkle var(--duration) ease-in-out infinite;
+}
+@keyframes twinkle {
+    0%, 100% { opacity: 0.3; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.5); }
+}
+
+/* --- OVERLAYS (Landing & Final) --- */
+.overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.85);
+    display: flex; justify-content: center; align-items: center;
+    z-index: 50; transition: opacity 1s ease;
+}
+.content-box {
+    text-align: center; max-width: 600px; padding: 40px;
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px); border-radius: 20px;
+    box-shadow: 0 0 30px rgba(0,0,0,0.5);
+}
+.content-box h1 { font-family: 'Playfair Display', serif; font-size: 2.5rem; margin-bottom: 20px; color: #ffebcd; }
+.content-box p { font-size: 1.1rem; line-height: 1.6; margin-bottom: 30px; color: #ddd; }
+.content-box button {
+    padding: 15px 40px; background: white; border: none; border-radius: 50px;
+    font-size: 1rem; font-weight: bold; cursor: pointer; transition: 0.3s;
+    color: #090a0f;
+}
+.content-box button:hover { transform: scale(1.1); box-shadow: 0 0 20px white; }
+
+/* --- MAIN INTERFACE --- */
+main { position: relative; width: 100%; height: 100%; z-index: 10; transition: opacity 1s;}
+
+.intro-text {
+    position: absolute; top: 20%; width: 100%; text-align: center;
+    transition: opacity 0.5s; pointer-events: none;
+}
+.intro-text h2 { font-family: 'Playfair Display', serif; font-size: 3rem; text-shadow: 0 0 20px rgba(255,255,255,0.5); }
+
+/* --- THE CARD (Where text appears) --- */
+.card-wrapper {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    display: flex; justify-content: center; align-items: center;
+    background: rgba(0,0,0,0.6); z-index: 20;
+    backdrop-filter: blur(5px);
+}
+.glass-card {
+    width: 90%; max-width: 500px; padding: 40px;
+    background: rgba(20, 20, 20, 0.9);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 20px; position: relative;
+    box-shadow: 0 0 50px rgba(0,0,0,0.8);
+    animation: popUp 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+@keyframes popUp { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+.close-btn {
+    position: absolute; top: 15px; right: 20px; background: none; border: none;
+    color: rgba(255,255,255,0.6); font-size: 2rem; cursor: pointer; transition: 0.2s;
+}
+.close-btn:hover { color: white; transform: scale(1.1); }
+
+/* --- TEXT STYLES --- */
+#dynamicContent h2 { margin-bottom: 20px; font-size: 2rem; }
+#dynamicContent p {
+    font-size: 1.1rem; line-height: 1.8; min-height: 120px;
+    white-space: pre-wrap; 
+    color: #e0e0e0;
+}
+
+/* Styles per trait */
+.tech-title { font-family: 'Fira Code', monospace; color: #61dafb; }
+.rom-title { font-family: 'Poppins', sans-serif; color: #ff69b4; }
+.cls-title { font-family: 'Playfair Display', serif; color: #ffebcd; }
+.tech-text { font-family: 'Fira Code', monospace; color: #cccccc; }
+.rom-text { font-family: 'Poppins', sans-serif; color: #ffffff; }
+
+/* --- BOTTOM DOCK --- */
+.dock {
+    position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%);
+    display: flex; gap: 20px; z-index: 30;
+}
+.star-btn {
+    width: 60px; height: 60px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.3);
+    background: rgba(255,255,255,0.1); backdrop-filter: blur(5px);
+    font-size: 1.5rem; cursor: pointer; transition: 0.3s;
+    display: flex; justify-content: center; align-items: center;
+}
+.star-btn:hover { transform: translateY(-10px) scale(1.2); background: rgba(255,255,255,0.3); }
+.special { border-color: #ff69b4; background: rgba(255,105,180,0.2); }
+
+/* --- UTILITIES --- */
+.hidden { display: none !important; }
+.glow { animation: glowing 2s infinite alternate; }
+@keyframes glowing { from { text-shadow: 0 0 10px white; } to { text-shadow: 0 0 30px #ff69b4; } }
+
+/* Blinking cursor effect for typing */
+.typing-cursor::after {
+    content: '|';
+    animation: blink 1s step-end infinite;
+}
+@keyframes blink { 50% { opacity: 0; } }

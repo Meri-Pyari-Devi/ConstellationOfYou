@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Constellation of You</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="stars" id="starContainer"></div>
+
+    <div class="overlay" id="landingPage">
+        <div class="content-box">
+            <h1>To My Universe</h1>
+            <p>
+                I wanted to write you a letter, but words on a page felt too flat.<br> 
+                They couldn't capture the way you actually shine.<br><br>
+                So, I built a universe instead.<br>
+                Because that is what you are to me.<br><br>
+                Put on your headphones. 🎧<br>
+                Here are the pieces of you that make my world go round.
+            </p>
+            <button onclick="enterSite()">Enter My Universe</button>
+        </div>
+    </div>
+
+    <main id="mainInterface" class="hidden">
+        
+        <div class="intro-text" id="introText">
+            <h2>The Constellation of Her</h2>
+            <p>Tap a star to listen.</p>
+        </div>
+
+        <div class="card-wrapper hidden" id="cardWrapper">
+            <div class="glass-card">
+                <button class="close-btn" onclick="closeCard()">×</button>
+                <div id="dynamicContent">
+                    </div>
+            </div>
+        </div>
+
+        <div class="dock">
+            <button class="star-btn" onclick="openStar('eyes')" title="Your Eyes">👁️</button>
+            <button class="star-btn" onclick="openStar('mind')" title="Your Mind">🧠</button>
+            <button class="star-btn" onclick="openStar('smile')" title="Your Smile">✨</button>
+            <button class="star-btn" onclick="openStar('heart')" title="Your Heart">❤️</button>
+            <button class="star-btn" onclick="openStar('chaos')" title="Your Chaos">🌪️</button>
+            <button class="star-btn special" onclick="finishStory()" title="Forever">💍</button>
+        </div>
+        
+    </main>
+
+    <div class="overlay hidden" id="finalPage">
+        <div class="content-box">
+            <h1 class="glow">My Forever Promise</h1>
+            <p id="finalText"></p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

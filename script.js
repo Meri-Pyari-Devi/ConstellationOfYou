@@ -41,6 +41,7 @@ const data = {
 // --- 2. GLOBAL VARIABLES ---
 let currentAudio = null;
 let typeInterval = null;
+let particleInterval = null;
 
 // --- 3. CORE FUNCTIONS ---
 
@@ -126,6 +127,7 @@ function playAudio(filename) {
     currentAudio.volume = 0.1; // Start quiet
     
     currentAudio.play().then(() => {
+        startParticles();
         // Fade In
         let fade = setInterval(() => {
             if (currentAudio && currentAudio.volume < 0.8) {
@@ -140,6 +142,7 @@ function playAudio(filename) {
 }
 
 function stopAudio() {
+    stopParticles();
     if (currentAudio) {
         // Simple fade out could go here, but strict stop is safer to prevent overlap
         currentAudio.pause();
@@ -192,3 +195,49 @@ for(let i=0; i<150; i++) {
     starContainer.appendChild(star);
 
 }
+// --- MAGICAL PARTICLE SYSTEM ---
+function startParticles() {
+    const card = document.querySelector('.glass-card');
+    
+    // Add breathing glow
+    card.classList.add('card-playing');
+
+    // Create a new particle every 400ms
+    particleInterval = setInterval(() => {
+        const particle = document.createElement('div');
+        particle.classList.add('music-particle');
+        
+        // Randomize icon: Note or Sparkle
+        particle.textContent = Math.random() > 0.5 ? '🎵' : '✨';
+        
+        // Randomize position width-wise on the card
+        const randomLeft = Math.random() * 80 + 10; // 10% to 90% width
+        particle.style.left = `${randomLeft}%`;
+        
+        // Randomize size slightly
+        particle.style.fontSize = `${Math.random() * 10 + 10}px`;
+
+        // Add to card
+        card.appendChild(particle);
+
+        // Clean up DOM after animation finishes (4s)
+        setTimeout(() => {
+            particle.remove();
+        }, 4000);
+
+    }, 400);
+}
+
+function stopParticles() {
+    const card = document.querySelector('.glass-card');
+    if(card) card.classList.remove('card-playing');
+    
+    if (particleInterval) {
+        clearInterval(particleInterval);
+        particleInterval = null;
+    }
+    
+    // Remove any remaining particles instantly
+    document.querySelectorAll('.music-particle').forEach(p => p.remove());
+}
+

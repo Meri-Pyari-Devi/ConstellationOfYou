@@ -150,7 +150,9 @@ function stopAudio() {
 
 // --- FINAL PROMISE ---
 function finishStory() {
-    stopAudio(); // FIXED: Prevents crash because function now exists
+    // CHANGE 1: Play the special song
+    // This automatically stops the previous star's audio
+    playAudio("forever.mp3"); 
     
     const main = document.getElementById('mainInterface');
     const finalPage = document.getElementById('finalPage');
@@ -166,7 +168,7 @@ function finishStory() {
     setTimeout(() => {
         main.classList.add('hidden');
         finalPage.classList.remove('hidden');
-        finalPage.style.opacity = '1'; // Ensure visibility
+        finalPage.style.opacity = '1'; 
         
         const message = "I have explored every star,\nevery corner of this universe,\nand I still haven't found anything\nas beautiful as you.\n\nYou are my favorite yes.\nYou are my forever. ❤️";
         
@@ -188,4 +190,5 @@ for(let i=0; i<150; i++) {
     star.style.height = `${size}px`;
     star.style.setProperty('--duration', `${Math.random() * 3 + 2}s`);
     starContainer.appendChild(star);
+
 }
